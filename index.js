@@ -16,9 +16,14 @@ const conn = require('./db/conn')
 const Toughts = require('./models/Tought')
 const User = require('./models/User')
 
+// importando a rota de toughts
+const toughtsRoutes = require('./routes/toughtsRoutes')
+// import controller
+const ToughtsController = require('./controllers/ToughtsController')
+
 // configurando o handlebars
 app.engine('handlebars', expbhs.engine())
-app.set('views engine', 'handlebars')
+app.set('view engine', 'handlebars')
 
 // receber resposta do body
 app.use(express.urlencoded({
@@ -60,6 +65,11 @@ app.use((req,res, next)=>{
   }
   next()
 })
+
+// routes
+app.use('/toughts', toughtsRoutes)
+
+app.get('/', ToughtsController.showToughts)
 
 conn.sync().then(()=>{
   app.listen(3333)
