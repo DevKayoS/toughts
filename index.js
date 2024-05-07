@@ -11,6 +11,11 @@ const app = express()
 
 // conectando ao banco de dados
 const conn = require('./db/conn')
+
+// MODELS
+const Toughts = require('./models/Tought')
+const User = require('./models/User')
+
 // configurando o handlebars
 app.engine('handlebars', expbhs.engine())
 app.set('views engine', 'handlebars')
