@@ -16,8 +16,9 @@ const conn = require('./db/conn')
 const Toughts = require('./models/Tought')
 const User = require('./models/User')
 
-// importando a rota de toughts
+// importando a rotas
 const toughtsRoutes = require('./routes/toughtsRoutes')
+const authRoutes = require('./routes/authRoutes')
 // import controller
 const ToughtsController = require('./controllers/ToughtsController')
 
@@ -68,6 +69,7 @@ app.use((req,res, next)=>{
 
 // routes
 app.use('/toughts', toughtsRoutes)
+app.use('/', authRoutes)
 
 app.get('/', ToughtsController.showToughts)
 
