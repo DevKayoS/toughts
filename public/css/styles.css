@@ -118,3 +118,17 @@ footer span{
   font-weight: bold;
   color: #f6982d;
 }
+
+/* messages */
+.message {
+  font-size: 12px;
+  padding: 1em;
+  color: #004085;
+  background-color: #cce5ff;
+  border: 1px solid #b8daff;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 40%;
+  margin-bottom: 20px;
+}
