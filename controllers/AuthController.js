@@ -3,14 +3,15 @@ const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 
 module.exports = class AuthController {
+  // renderizar a página de login do usuário
   static login(req,res){
     res.render('auth/login')
   }
-
+  // renderizar a página de registro do usuário
   static register(req,res){
     res.render('auth/register')
   }
-
+  // registrar usuário
   static async registerUser(req,res){
     const {name, email, password, confirmpassword} = req.body
     // password match validation
@@ -49,4 +50,11 @@ module.exports = class AuthController {
       console.log(error)
     }
   }
+
+    static async logoutUser(req,res){
+      req.session.destroy()
+      res.redirect('/login')
+    }
+
+
 }
