@@ -10,4 +10,11 @@ module.exports = class ToughtsController {
   static async dashboard(req,res){
     res.render('toughts/dashboard')
   }
+  // exibindo o formulário de criação de pensamentos
+  static addTought(req,res){
+    res.render('toughts/add')
+  }
+  static async addToughtPost(req, res){
+    
+  }
 }
