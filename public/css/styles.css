@@ -132,3 +132,24 @@ footer span{
   max-width: 40%;
   margin-bottom: 20px;
 }
+
+/* create e edit form */
+.tought-form-container a {
+  color: #f6982d;
+}
+.tought-form-container a:hover {
+  color: #FFF;
+}
+
+.tought-form-container h1 {
+  margin: 1em 0;
+  color: #fff;
+  border-radius: 5px;
+  border-left: 5px solid #f6982d;
+  padding: 0.3em;
+}
+
+.tought-form-container form {
+  max-width: 50%;
+  margin-top: 1.5em;
+}
