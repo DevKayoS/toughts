@@ -21,8 +21,13 @@ module.exports = class ToughtsController {
       res.redirect('/login')
     }
     const toughts = user.Toughts.map((result)=>result.dataValues)
+    let emptyToughts = false
 
-    res.render('toughts/dashboard', {toughts})
+    if(toughts.length === 0){
+      emptyToughts = true
+    }
+
+    res.render('toughts/dashboard', {toughts, emptyToughts})
   }
   // exibindo o formulário de criação de pensamentos
   static addTought(req,res){
