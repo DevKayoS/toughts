@@ -1,3 +1,4 @@
+const Toughts = require('../models/Tought')
 const Tought = require('../models/Tought')
 const User = require('../models/User')
 
@@ -50,7 +51,7 @@ module.exports = class ToughtsController {
     console.log('Aconteceu um erro: ',error)
   }
 }
-
+// removendo pensamento
 static async removeTought(req, res){
   const id = req.body.id
   const userId = req.session.userid
@@ -62,6 +63,33 @@ static async removeTought(req, res){
     })
   } catch (error) {
     console.log('Aconteceu um erro: ', error)
+  }
+}
+// exibindo a aba de edição
+static async updateToughts(req,res){
+  const id = req.params.id
+  const UserId = req.session.userid
+  const toughts = await Toughts.findOne({raw: true, where: {id:id, UserId: UserId}})
+
+  res.render('toughts/update', {toughts})
+}
+
+// atualizando no banco de dados 
+static async updateToughtsPost(req,res){
+  const UserId =  req.session.userid
+  const id = req.body.id
+
+  const tought = {
+    title: req.body.title,
+  }
+  try {
+    await Tought.update(tought, {where: {id: id, UserId: UserId}})
+    req.flash('message', 'Pensamento atualizado com sucesso!')
+    req.session.save(()=>{
+      res.redirect('/toughts/dashboard')
+    })
+  } catch (error) {
+    console.log('Aconteceu um erro: '. error)
   }
 }
 }

@@ -10,5 +10,7 @@ router.get('/dashboard', checkAuth, ToughtsController.dashboard)
 router.post('/remove', checkAuth, ToughtsController.removeTought)
 router.get('/add', checkAuth, ToughtsController.addTought)
 router.post('/add', checkAuth, ToughtsController.addToughtPost)
+router.get('/update/:id', checkAuth, ToughtsController.updateToughts)
+router.post('/update', checkAuth, ToughtsController.updateToughtsPost)
 
 module.exports = router
