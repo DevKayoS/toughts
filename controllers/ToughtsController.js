@@ -43,6 +43,20 @@ module.exports = class ToughtsController {
       })
    } catch (error) {
     console.log('Aconteceu um erro: ',error)
-   }
   }
+}
+
+static async removeTought(req, res){
+  const id = req.body.id
+  const userId = req.session.userid
+  try {
+    await Tought.destroy({where: {id:id,  UserId: userId }})
+    req.flash('message', 'Pensamento excluído com sucesso!')
+    req.session.save(()=>{
+      res.redirect('/toughts/dashboard')
+    })
+  } catch (error) {
+    console.log('Aconteceu um erro: ', error)
+  }
+}
 }
