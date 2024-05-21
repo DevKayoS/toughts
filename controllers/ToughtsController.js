@@ -5,6 +5,9 @@ const User = require('../models/User')
 module.exports = class ToughtsController {
   // exibindo a home
   static async showToughts(req,res){
+
+    const tought = await Toughts
+
     res.render('toughts/home')
   }
   // exibindo o dashboard
