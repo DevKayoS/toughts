@@ -6,9 +6,13 @@ module.exports = class ToughtsController {
   // exibindo a home
   static async showToughts(req,res){
 
-    const tought = await Toughts
+    const toughtsData = await Toughts.findAll({
+      include: User,
+    })
 
-    res.render('toughts/home')
+    const toughts = toughtsData.map((result)=> result.get({plain: true}))
+
+    res.render('toughts/home', {toughts})
   }
   // exibindo o dashboard
   static async dashboard(req,res){
