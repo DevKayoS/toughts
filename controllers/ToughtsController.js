@@ -13,13 +13,21 @@ module.exports = class ToughtsController {
     if(req.query.search){
       search=req.query.search
     }
+    // fazendo a ordenação
+    let order='DESC'
+    if(req.query.order==='old'){
+      order='ASC'
+    }else {
+      order ='DESC'
+    }
 
     const toughtsData = await Toughts.findAll({
       include: User,
       // se vir alguma coisa no search ele vai filtrar com oq veio 
       where:{
         title: {[Op.like]: `%${search}%`}
-      }
+      },
+      order: [['createdAt', order]]
     })
 
     const toughts = toughtsData.map((result)=> result.get({plain: true}))
