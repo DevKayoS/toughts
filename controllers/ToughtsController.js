@@ -1,18 +1,35 @@
 const Toughts = require('../models/Tought')
 const Tought = require('../models/Tought')
 const User = require('../models/User')
+// operador para fazer pesquisa
+const {Op} = require('sequelize')
 
 module.exports = class ToughtsController {
   // exibindo a home
   static async showToughts(req,res){
+    
+    // configurando para busca
+    let search=''
+    if(req.query.search){
+      search=req.query.search
+    }
 
     const toughtsData = await Toughts.findAll({
       include: User,
+      // se vir alguma coisa no search ele vai filtrar com oq veio 
+      where:{
+        title: {[Op.like]: `%${search}%`}
+      }
     })
 
     const toughts = toughtsData.map((result)=> result.get({plain: true}))
+    // exibir a quantide de pensamentos filtrados
+    let toughtsQty = toughts.length
+    if(toughtsQty === 0){
+      toughtsQty=false
+    }
 
-    res.render('toughts/home', {toughts})
+    res.render('toughts/home', {toughts, search, toughtsQty})
   }
   // exibindo o dashboard
   static async dashboard(req,res){
